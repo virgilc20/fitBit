@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en-US">
-	<head>
-		<meta charset="utf-8"/>
-		<link rel="stylesheet" type="text/css" href="style.css" />
-		<title>LitFit</title>
-	</head>
-	<body>
-	</body>
-</html>
+<?php
+	require "header.php";
+?>
+
+	<main>
+		<?php
+			if (isset($_SESSION['userId'])) {
+				echo '<p>You are logged in!</p>';
+			}
+			else {
+				echo '<p>You are logged out!</p>';
+			}
+		?>
+	</main>
+
+<?php
+	require "footer.php";
+?>
