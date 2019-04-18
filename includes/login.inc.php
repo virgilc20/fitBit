@@ -22,24 +22,25 @@ if (isset($_POST['login-submit'])) {
 			mysqli_stmt_bind_param($stmt, "ss", $mailuid, $mailuid);
 			mysqli_stmt_execute($stmt);
 
-			mysqli_stmt_bind_result($stmt, $idUsers, $uidUsers, $emailUsers, $pwdUsers); ////////////////////////////////////solve this bull
+			mysqli_stmt_bind_result($stmt, $dbIdUsers, $dbUidUsers, $dbEmailUsers, $dbPwdUsers);
+			while (mysqli_stmt_fetch($stmt)) {
+				$idUsers = $dbIdUsers;
+				$uidUsers = $dbUidUsers;
+				$emailUsers = $dbEmailUsers;
+				$pwdUsers = $dbPwdUsers;
+			}
 
+			if (!empty($idUsers) && !empty($uidUsers) && !empty($emailUsers) && !empty($pwdUsers)) { //why is pwdUsers returning empty?
 
-			$RESULT = get_result($stmt);
-
-			while ($DATA = array_shift($RESULT)) {
-
-
-
-				$pwdCheck = password_verify($password, $row['pwdUsers']);
+				$pwdCheck = password_verify($password, $pwdUsers);
 				if ($pwdCheck == false) {																					
 					header("Location: ../index.php?error=wrongpwd");
 					exit();
 				}
 				else if ($pwdCheck == true) {
 					session_start();
-					$_SESSION['userId'] = $row['idUsers'];
-					$_SESSION['userUid'] = $row['uidUsers'];
+					$_SESSION['userId'] = $idUsers;
+					$_SESSION['userUid'] = $uidUsers;
 
 					header("Location: ../index.php?login=success");
 					exit();
@@ -48,14 +49,21 @@ if (isset($_POST['login-submit'])) {
 					header("Location: ../index.php?error=wrongpwd");
 					exit();
 				}
+			}
 
-
-
+			else {
+				//header("Location: ../index.php?error=nouser");
+				echo($idUsers);
+				echo($uidUsers);
+				echo($emailUsers);
+				echo("TEST");
+				echo($pwdUsers);
+				echo("&&&TEST");
+				//exit();
 			}
 		}
-
-	
-}}
+	}
+}
 else {
 	header("Location: ../index.php?");
 	exit();
