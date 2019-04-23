@@ -1,81 +1,90 @@
-<?php
-
- $urlTemplate = 'http://api.ip2location.com/?' . 'ip=%s&key=demo' . '&package=WS24&format=json';
- $host= gethostname();
- $ipAddress = trim(file_get_contents("https://simplesniff.com/ip"));
-
- // replace the "%s" with real IP address
- $urlToCall = sprintf( $urlTemplate, $ipAddress);
- 
- $rawJson = file_get_contents( $urlToCall );
- 
- $geoLocation = json_decode( $rawJson, true );
- 
- if(isset($geoLocation['city_name'])){
- 
-    if($geoLocation['city_name']!="-"){
-        echo '<script language="javascript">';
-        echo 'alert("Welcome Visitors from '.$geoLocation['city_name'].'")';
-        echo '</script>';
-    }else
-    {
-        echo '<center>You are in local server!</center><br>';
-        echo '<script language="javascript">';
-        echo 'alert("You are in local server!")';
-        echo '</script>';
-    }
- }else{
-     echo 'IP Address parsing error!';
- }
-?>
-
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
+<head>
+<meta charset="utf-8">
 	<head>
-    	<title>Geolocation Weather Tracker by IP</title>
+    	<title>Weather by Location</title>
   	</head>
 
-		<body>
-		<div>
-		<center>Hello World!</center><br>
-		</div>
-		<div>
-		<center>Your IP address <?php echo $ipAddress; ?></center>
-		      <center>
-		      <?php
-		      if(isset($geoLocation['country_code'])&&isset($geoLocation['country_name'])&&isset($geoLocation['region_name'])&&isset($geoLocation['city_name'])&&isset($geoLocation['latitude'])&&isset($geoLocation['longitude'])&&isset($geoLocation['zip_code'])&&isset($geoLocation['time_zone'])){
-		        echo '<br>Country Code:'."\n". $geoLocation['country_code'] . "\n<br>";
-		        echo 'Country Name:'."\n". $geoLocation['country_name'] . "\n<br>";
-		        echo 'Region Name:'."\n". $geoLocation['region_name'] . "\n<br>";
-		        echo 'City Name:'."\n". $geoLocation['city_name'] . "\n<br>";
-		        echo 'Latitude:'."\n". $geoLocation['latitude'] . "\n<br>";
-		        echo 'Longitude:'."\n". $geoLocation['longitude'] . "\n<br>";
-		        echo 'Zip code:'."\n". $geoLocation['zip_code'] . "\n<br>";
-		        echo 'Time zone:'."\n". $geoLocation['time_zone'] . "\n<br>";
-		      }else{
-		          echo 'IP Address parsing error!';
-		      }
-		      ?>
-		      </center>
-		</div>
+  	<script type="text/javascript">
 
-		<?php 
-		
-			$query = "http://api.openweathermap.org/data/2.5/weather?q=";
-			$query2 = "&APPID=";
-			$currentLocation = $geoLocation['city_name'].",".$geoLocation['country_name'];
-			$key = "a989804cced95e7d3d909203b60503fe";
+	    function showPosition(){
+	        if(navigator.geolocation){
+	            navigator.geolocation.getCurrentPosition(function(position){
+	                getWeather(position.coords.latitude,position.coords.longitude);
+	            });
+	        } else{
+	            alert("Sorry, your browser does not support HTML5 geolocation.");
+	        }
+	    }
 
-			$url = $query.$currentLocation.$query2.$key;
-    		$response  = file_get_contents($url);
-    		$jsonobj  = json_decode($response);			
+	    //called to find the weather from the above function
+	    function getWeather(lat, long){
+	    	let stem = "http://api.openweathermap.org/data/2.5/weather?";
+	    	let latitude = "lat=" + lat;
+	    	let longitude = "&lon=" + long;
+	    	let units = "&units=imperial";
+	    	let key = "&appid=a989804cced95e7d3d909203b60503fe";
+	    	let url = stem + latitude + longitude + units + key;
+	    	//querys the OWM API and gets the JSON for the data
+			fetch(url)
+				.then(checkStatus)
+				.then(JSON.parse)
+				.then(handleResponse)
+				.catch(console.log);    	
+
+	    }
+
+		/*
+		   * Taken from: https://courses.cs.washington.edu/courses/cse154/19sp/resources/assets/templates/js/ajax-template-documented.js
+		   * Helper function to return the response's result text if successful, otherwise
+		   * returns the rejected Promise result with an error status and corresponding text
+		   * @param {object} response - response to check for success/error
+		   * @returns {object} - valid result text if response was successful, otherwise rejected
+		   *                     Promise result
+		   */
+		  function checkStatus(response) {
+		    if (response.status >= 200 && response.status < 300 || response.status == 0) {
+		      return response.text();
+		    } else {
+		      return Promise.reject(new Error(response.status + ": " + response.statusText));
+		    }
+		  }
+
+	    function handleResponse(data){
+	    	// Parse data and display it using DOM manipulation
+	    	// Overwrite HTML
+
+	    	var sect = document.querySelector('section');
+
+	       	var description = document.createElement('p');
+			description.textContent = 'Weather Today: ' + data["weather"][0]["description"];
+
+			var currentTemp = document.createElement('p');
+			currentTemp.textContent = 'Current Temperature: ' + data["main"]["temp"] + "°";
+		    
+			var minTemp = document.createElement('p');
+			minTemp.textContent = 'Minimum Temperature today: ' + data["main"]["temp_min"] + "°";
+
+			var maxTemp = document.createElement('p');
+			maxTemp.textContent = 'Maxium Temperature: ' + data["main"]["temp_max"] + "°";
+
+			var wind = document.createElement('p');
+			wind.textContent = 'Wind Speed: ' + data["wind"]["speed"] + "mph";
+
+	        sect.appendChild(description);
+	        sect.appendChild(currentTemp);
+	        sect.appendChild(minTemp);
+	        sect.appendChild(maxTemp);
+	        sect.appendChild(wind);
+	    }
+
+	    showPosition();
+	</script>
+
+	<body>
+		<section>
 			
-		?>
-
-		<p>
-			<br/><center>Temperature: <? print_r(($jsonobj->main->temp)-273.15); ?> degrees celsius</center>
-			<br/><center>Humidity: <? print_r($jsonobj->main->humidity); ?> % </center>
-		</p>
-
+		</section>
 	</body>
 </html>
