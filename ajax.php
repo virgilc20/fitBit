@@ -1,40 +1,38 @@
 <?php
 	require 'includes/dbh.inc.php';
 
+	$type = $_GET["type"];
+	$subtype = $_GET["subtype"];
 
-	$topType = $_GET["topType"];
+	if (!empty($type)) {
+		$res = mysqli_query($conn, "SELECT DISTINCT subtype FROM pjiang_litfit_attire_list WHERE type = '$type'"); 
+		echo "<select id='subtypedd' onChange='changeSubtype()'>";
+		echo "<option value='select'>Select</option>";
+		while ($row = mysqli_fetch_array($res)) {
+			?>
+			<option value="<?php echo $row["subtype"]; ?>">
+			<?php
+			echo $row["subtype"];
+			echo "</option>";
+		}
 
-	if (!empty($topType)) {
-		$res = mysqli_query($conn, "SELECT * FROM pjiang_top_subtype WHERE type = $topType"); //ints match to ints- try to get strings match to strings
+		echo "</select>";
+	}
+
+	if (!empty($subtype)) {
+		$res = mysqli_query($conn, "SELECT id, subsubtype FROM pjiang_litfit_attire_list WHERE subtype = '$subtype'"); 
 		echo "<select>";
 		echo "<option value='select'>Select</option>";
 		while ($row = mysqli_fetch_array($res)) {
 			?>
 			<option value="<?php echo $row["id"]; ?>">
 			<?php
-			echo $row["subtype"];
+			echo $row["subsubtype"];
 			echo "</option>";
 		}
 
-		echo "</select";
+		echo "</select>";
 	}
 
 
-
-	$bottomType = $_GET["bottomType"];
-
-	if (!empty($bottomType)) {
-		$res = mysqli_query($conn, "SELECT * FROM pjiang_bottom_subtype WHERE type = $bottomType"); //ints match to ints- try to get strings match
-		echo "<select>";
-		echo "<option value='select'>Select</option>";
-		while ($row = mysqli_fetch_array($res)) {
-			?>
-			<option value="<?php echo $row["id"]; ?>">
-			<?php
-			echo $row["subtype"];
-			echo "</option>";
-		}
-
-		echo "</select";
-	}
 ?>

@@ -14,15 +14,15 @@
 	<form method="POST" action="">
 		<table>
 			<tr>
-				<td>Select Top Type</td>
+				<td>Select Type</td>
 				<td>
-					<select id="topTypedd" onChange="changeTopType()">
+					<select id="typedd" onChange="changeType()">
 						<option value="select">Select</option>
 						<?php
-							$res = mysqli_query($conn, "SELECT * FROM pjiang_top_type;");
+							$res = mysqli_query($conn, "SELECT DISTINCT type FROM pjiang_litfit_attire_list");
 							while ($row = mysqli_fetch_array($res)) {		
 								?>					
-								<option value="<?php echo $row["id"]; ?>">
+								<option value="<?php echo $row["type"]; ?>">
 									<?php echo $row["type"]; ?>
 								</option>
 								<?php
@@ -33,69 +33,25 @@
 			</tr>
 
 			<tr>
-				<td>Select Top Subtype</td>
+				<td>Select Subtype</td>
 				<td>
-					<div id="topSubtype">
+					<div id="subtype">
 					<select>
 						<option value="select">Select</option>
 					</select>
 					</div>
 				</td>
-
 			</tr>
 
 			<tr>
-				<td>Select Color</td>
+				<td>Select Subsubtype</td>
 				<td>
-					<input type="color" name="color" value="#ff0000">
-				</td>
-			</tr>
-
-			<tr>
-				<td>Select Pattern</td>
-				<td>
-					<select>
-						<option value="none">None</option>
-						<option value="horstripe">Horizontal Stripes</option>
-						<option value="vertstripe">Vertical Stripes</option>
-					</select>
-				</td>
-			</tr>
-
-			<!-- the bottom table starts here--------probably combine tables in a way--------------------------------------------------------- -->
-			<tr><td></br></br></td></tr>
-
-
-
-			<tr>
-				<td>Select Bottom Type</td>
-				<td>
-					<select id="bottomTypedd" onChange="changeBottomType()">
-						<option value="select">Select</option>
-						<?php
-							$res = mysqli_query($conn, "SELECT * FROM pjiang_bottom_type;");
-							while ($row = mysqli_fetch_array($res)) {		
-								?>					
-								<option value="<?php echo $row["id"]; ?>">
-									<?php echo $row["type"]; ?>
-								</option>
-								<?php
-							}
-						?>
-					</select>
-				</td>
-			</tr>
-
-			<tr>
-				<td>Select Bottom Subtype</td>
-				<td>
-					<div id="bottomSubtype">
+					<div id="subsubtype">
 					<select>
 						<option value="select">Select</option>
 					</select>
 					</div>
 				</td>
-
 			</tr>
 
 			<tr>
@@ -123,24 +79,28 @@
 			</tr>
 
 
-
 		</table>
 	</form>
 
 	<script type="text/javascript">
-		function changeTopType() {
+		function changeType() {
 			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.open("GET", "ajax.php?topType="+document.getElementById("topTypedd").value, false);
+			xmlhttp.open("GET", "ajax.php?type="+document.getElementById("typedd").value, false);
 			xmlhttp.send(null);
-			document.getElementById("topSubtype").innerHTML=xmlhttp.responseText;
+			document.getElementById("subtype").innerHTML=xmlhttp.responseText;
+
+			if (document.getElementById("typedd").value == 'select') { //this checks for absense (select) but not for changes, fix
+				document.getElementById("subsubtype").innerHTML="<select><option>Select</option></select>"; 
+			}
 		}
 
-		function changeBottomType() {
+		function changeSubtype() {
 			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.open("GET", "ajax.php?bottomType="+document.getElementById("bottomTypedd").value, false);
+			xmlhttp.open("GET", "ajax.php?subtype="+document.getElementById("subtypedd").value, false);
 			xmlhttp.send(null);
-			document.getElementById("bottomSubtype").innerHTML=xmlhttp.responseText;
+			document.getElementById("subsubtype").innerHTML=xmlhttp.responseText;
 		}
+
 	</script>	
 
 
