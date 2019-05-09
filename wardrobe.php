@@ -8,10 +8,17 @@
 
 	<?php
 		require 'includes/dbh.inc.php';
+
+
+
+		function addWardrobe() {
+			//submit form info???????????
+		}
 	?>
 
 
-	<form method="POST" action="">
+<div id="wardrobe_form">
+	<form action="">
 		<table>
 			<tr>
 				<td>Select Type</td>
@@ -47,40 +54,42 @@
 				<td>Select Subsubtype</td>
 				<td>
 					<div id="subsubtype">
-					<select>
+					<select id="attire">
 						<option value="select">Select</option>
 					</select>
 					</div>
 				</td>
 			</tr>
 
+			<!-- <tr>
+				<td>Select Pattern</td>
+				<td>
+					<div id="pattern">
+					<select>
+						<option value="select">Select</option>
+					</select>
+					</div>
+				</td>
+			</tr> -->
+
 			<tr>
 				<td>Select Color</td>
 				<td>
-					<input type="color" name="color" value="#ff0000">
+					<input id="color" type="color" name="color" value="#ff0000">
 				</td>
 			</tr>
 
-			<tr>
-				<td>Select Pattern</td>
-				<td>
-					<select>
-						<option value="none">None</option>
-						<option value="horstripe">Horizontal Stripes</option>
-						<option value="vertstripe">Vertical Stripes</option>
-					</select>
-				</td>
-			</tr>
 
 			<tr>
 				<td>
-					<input type="submit" value="GO!" />
+					<button onclick="addWardrobe()"> Add to Wardrobe </button>
 				</td>	
 			</tr>
 
 
 		</table>
 	</form>
+</div>
 
 	<script type="text/javascript">
 		function changeType() {
@@ -89,12 +98,14 @@
 			xmlhttp.send(null);
 			document.getElementById("subtype").innerHTML=xmlhttp.responseText;
 
-			if (document.getElementById("typedd").value == 'select') { //this checks for absense (select) but not for changes, fix
-				document.getElementById("subsubtype").innerHTML="<select><option>Select</option></select>"; 
-			}
+			//document.getElementById("pattern").innerHTML=xmlhttp.responseText; change pattern, and fit, based off of type
+			//document.getElementById("fit").innerHTML=xmlhttp.responseText;
+
+			document.getElementById("subsubtype").innerHTML="<select><option value='select'>Select</option></select>";
 		}
 
 		function changeSubtype() {
+
 			var xmlhttp = new XMLHttpRequest();
 			xmlhttp.open("GET", "ajax.php?subtype="+document.getElementById("subtypedd").value, false);
 			xmlhttp.send(null);
@@ -102,7 +113,6 @@
 		}
 
 	</script>	
-
 
 </body>
 </html>

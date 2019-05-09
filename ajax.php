@@ -4,7 +4,7 @@
 	$type = $_GET["type"];
 	$subtype = $_GET["subtype"];
 
-	if (!empty($type)) {
+	if (!empty($type)) { //these are never actually empty?
 		$res = mysqli_query($conn, "SELECT DISTINCT subtype FROM pjiang_litfit_attire_list WHERE type = '$type'"); 
 		echo "<select id='subtypedd' onChange='changeSubtype()'>";
 		echo "<option value='select'>Select</option>";
