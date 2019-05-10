@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 03, 2019 at 06:29 PM
+-- Generation Time: May 10, 2019 at 07:01 AM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.2.1
 
@@ -31,9 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `pjiang_litfit_wardrobe` (
   `id` int(11) NOT NULL,
   `attireId` int(11) NOT NULL,
-  `color` varchar(50) NOT NULL,
-  `pattern` varchar(50) NOT NULL,
-  `fit` varchar(50) NOT NULL
+  `color` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
