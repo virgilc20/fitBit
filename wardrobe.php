@@ -2,23 +2,16 @@
 <html>
 <head>
 	<title>Wardrobe</title>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script> <!-- microsoft cdn jquery -->
 </head>
 <body>
-	<h1>Add Clothes to your Wardrobe!</h1>
+	<h2 id="intro">Add Clothes to your Wardrobe!</h2>
 
 	<?php
 		require 'includes/dbh.inc.php';
-
-
-
-		function addWardrobe() {
-			//submit form info???????????
-		}
 	?>
 
-
-<div id="wardrobe_form">
-	<form action="">
+	<form id="wardrobe_form" action="">
 		<table>
 			<tr>
 				<td>Select Type</td>
@@ -35,6 +28,8 @@
 								<?php
 							}
 						?>
+
+						
 					</select>
 				</td>
 			</tr>
@@ -54,23 +49,12 @@
 				<td>Select Subsubtype</td>
 				<td>
 					<div id="subsubtype">
-					<select id="attire">
-						<option value="select">Select</option>
-					</select>
-					</div>
-				</td>
-			</tr>
-
-			<!-- <tr>
-				<td>Select Pattern</td>
-				<td>
-					<div id="pattern">
 					<select>
 						<option value="select">Select</option>
 					</select>
 					</div>
 				</td>
-			</tr> -->
+			</tr>
 
 			<tr>
 				<td>Select Color</td>
@@ -82,14 +66,48 @@
 
 			<tr>
 				<td>
-					<button onclick="addWardrobe()"> Add to Wardrobe </button>
+					<input type="submit" name="submit" class="button" id="submit_btn" value="send">
 				</td>	
 			</tr>
 
 
 		</table>
-	</form>
-</div>
+	</form>	
+
+
+	<script>
+		$(function() {
+			$(".button").click(function() {
+
+					//focus?
+					var attire = $("#attire").val(); //check if empty, further validation required
+						if (attire == "select" || attire == null) {
+							alert("Please fully select an article of clothing.");
+							return false;
+						}
+					var color = $("#color").val();
+
+					$.ajax({
+						type: "POST",
+						url: "wardrobeUpdate.php",
+						data: {attire: attire, color: color},
+						success: function() {
+							$('#intro').html("<h4 id='intro'>Succesfully added! Add another?</h4>").hide().fadeIn("1500", function() {
+								//Animation complete. also, why is this h4 v. h2?
+							});
+							$('#wardrobe_form')[0].reset()
+							$('#subtype').html("<select><option value='select'>Select</option></select>")
+							$('#subsubtype').html("<select><option value='select'>Select</option></select>")
+						}
+					});
+
+					return false;
+			});
+		});
+	</script>
+
+
+
 
 	<script type="text/javascript">
 		function changeType() {
@@ -97,10 +115,6 @@
 			xmlhttp.open("GET", "ajax.php?type="+document.getElementById("typedd").value, false);
 			xmlhttp.send(null);
 			document.getElementById("subtype").innerHTML=xmlhttp.responseText;
-
-			//document.getElementById("pattern").innerHTML=xmlhttp.responseText; change pattern, and fit, based off of type
-			//document.getElementById("fit").innerHTML=xmlhttp.responseText;
-
 			document.getElementById("subsubtype").innerHTML="<select><option value='select'>Select</option></select>";
 		}
 
@@ -113,6 +127,8 @@
 		}
 
 	</script>	
+
+	
 
 </body>
 </html>
