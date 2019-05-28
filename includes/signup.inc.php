@@ -32,7 +32,7 @@ if (isset($_POST['signup-submit'])) {
 
 
 		$sql = "SELECT uidUsers FROM pjiang_users WHERE uidUsers=?";
-		$stmt = mysqli_stmt_init($conn); 																	//make sure $conn works!
+		$stmt = mysqli_stmt_init($conn); 																	
 		if (!mysqli_stmt_prepare($stmt, $sql)) {
 			header("Location: ../signup.php?error=sqlerror");
 			exit();
@@ -48,7 +48,7 @@ if (isset($_POST['signup-submit'])) {
 			}
 			else {
 				$sql = "INSERT INTO pjiang_users (uidUsers, emailUsers, pwdUsers) VALUES (?, ?, ?)";
-				$stmt = mysqli_stmt_init($conn);																	//$conn
+				$stmt = mysqli_stmt_init($conn);																	
 				if (!mysqli_stmt_prepare($stmt, $sql)) {
 					header("Location: ../signup.php?error=sqlerror");
 					exit();
@@ -66,7 +66,7 @@ if (isset($_POST['signup-submit'])) {
 
 	}
 	mysqli_stmt_close($stmt);
-	mysqli_close($conn);  																							//$conn
+	mysqli_close($conn);  																							
 
 }
 else {

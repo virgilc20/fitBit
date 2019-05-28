@@ -11,6 +11,9 @@ if (isset($_POST['login-submit'])) {
 		exit();
 	}
 	else {
+
+
+
 		$sql = "SELECT * FROM pjiang_users WHERE uidUsers=? OR emailUsers=?;";
 		$stmt = mysqli_stmt_init($conn);
 
@@ -21,6 +24,7 @@ if (isset($_POST['login-submit'])) {
 		else {
 			mysqli_stmt_bind_param($stmt, "ss", $mailuid, $mailuid);
 			mysqli_stmt_execute($stmt);
+			mysqli_stmt_store_result($stmt); //store results
 
 			mysqli_stmt_bind_result($stmt, $dbIdUsers, $dbUidUsers, $dbEmailUsers, $dbPwdUsers);
 			while (mysqli_stmt_fetch($stmt)) {
@@ -30,7 +34,7 @@ if (isset($_POST['login-submit'])) {
 				$pwdUsers = $dbPwdUsers;
 			}
 
-			if (!empty($idUsers) && !empty($uidUsers) && !empty($emailUsers) && !empty($pwdUsers)) { //why is pwdUsers returning empty?
+			if (!empty($idUsers) && !empty($uidUsers) && !empty($emailUsers) && !empty($pwdUsers)) { 
 
 				$pwdCheck = password_verify($password, $pwdUsers);
 				if ($pwdCheck == false) {																					
@@ -53,12 +57,10 @@ if (isset($_POST['login-submit'])) {
 
 			else {
 				//header("Location: ../index.php?error=nouser");
-				echo($idUsers);
-				echo($uidUsers);
-				echo($emailUsers);
-				echo("TEST");
-				echo($pwdUsers);
-				echo("&&&TEST");
+				echo("id: ".$idUsers);
+				echo(" username: ".$uidUsers);
+				echo(" email: ".$emailUsers);
+				echo(" password: ".$pwdUsers);
 				//exit();
 			}
 		}
