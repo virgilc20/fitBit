@@ -60,13 +60,13 @@
 			description.textContent = 'Weather Today: ' + data["weather"][0]["description"];
 
 			var currentTemp = document.createElement('p');
-			currentTemp.textContent = 'Current Temperature: ' + data["main"]["temp"] + "°";
+			currentTemp.textContent = 'Current Temperature: ' + Math.round(data["main"]["temp"]) + "° F";
 		    
 			var minTemp = document.createElement('p');
-			minTemp.textContent = 'Minimum Temperature today: ' + data["main"]["temp_min"] + "°";
+			minTemp.textContent = 'Minimum Temperature: ' + Math.round(data["main"]["temp_min"]) + "°";
 
 			var maxTemp = document.createElement('p');
-			maxTemp.textContent = 'Maxium Temperature: ' + data["main"]["temp_max"] + "°";
+			maxTemp.textContent = 'Maxium Temperature: ' + Math.round(data["main"]["temp_max"]) + "°";
 
 			var wind = document.createElement('p');
 			wind.textContent = 'Wind Speed: ' + data["wind"]["speed"] + "mph";
@@ -91,35 +91,20 @@
 		<li><a href ="profile.php">PROFILE</a></li>
 	</ul>
 	<div class="wrapper">
-		<div class="uppertile">
+		<div>
 			<div class="innercontent">
-				<h1>Weather</h1>
+				<h1 class="header">Your Outfit Today</h1>
 
+				<!-- This is the place where the javascript inserts the weather information -->
 				<section>
 			
 				</section>
-
 				
 
 				<img src = "https://requestreduce.org/images/sun-clipart-public-domain-10.png">
-				<p id="temperature"> 74</p>
 			</div>
 		</div>
-		<div class="uppertile">
-			<div class="innercontent">
-				<h1> Wardrobe </h1>
-			</div>
-		</div>
-		<div class="tile">
-			<div class="innercontent">
-				<h1> Outfits </h1>
-			</div>
-		</div>
-		<div class="tile">
-			<div class="innercontent">
-				<h1> Profile </h1>
-			</div>
-		</div>
+		
 	</div>
 </body>
 </html>

@@ -58,6 +58,11 @@ li a:active
 	position:relative;
 	background-color: #92e0f7;
 }
+.header
+{
+	padding-top: 20px;
+	font-size: 100px;
+}
 .innercontent
 {
 	position:absolute;
