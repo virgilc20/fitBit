@@ -71,6 +71,26 @@
 			var wind = document.createElement('p');
 			wind.textContent = 'Wind Speed: ' + data["wind"]["speed"] + "mph";
 
+			var img = new Image();
+
+			if(data["weather"][0]["description"].localeCompare('sky is clear') == 0){
+				img.src = 'https://st.depositphotos.com/1216158/3267/v/950/depositphotos_32676701-stock-illustration-sun-clipart.jpg';
+
+			} else if (data["weather"][0]["description"].localeCompare('overcast clouds') == 0 || data["weather"][0]["description"].localeCompare('few clouds') == 0 || data["weather"][0]["description"].localeCompare('broken clouds') == 0 || data["weather"][0]["description"].localeCompare('scattered clouds') == 0 ) {
+				img.src = 'http://images.clipartpanda.com/cloud-clip-art-rgtaylor_csc_net_wan_cloud.png';
+
+			} else if (data["weather"][0]["description"].localeCompare('light rain') == 0 || data["weather"][0]["description"].localeCompare('moderate rain') == 0 || data["weather"][0]["description"].localeCompare('heavy intensity rain') == 0) {
+				img.src = 'http://clipart-library.com/data_images/395646.png';
+			
+			} else if (data["weather"][0]["description"].localeCompare('snow') == 0 || data["weather"][0]["description"].localeCompare('light snow') == 0 || data["weather"][0]["description"].localeCompare('heavy snow') == 0) {
+				img.src = 'https://clipartion.com/wp-content/uploads/2015/11/snow-clipart-png-file-tag-list-snow-clip-arts-file-clipartsfree.png';
+
+			}
+
+			img.height = 150;
+			img.width = 150;
+
+			sect.appendChild(img);
 	        sect.appendChild(description);
 	        sect.appendChild(currentTemp);
 	        sect.appendChild(minTemp);
@@ -95,13 +115,19 @@
 			<div class="innercontent">
 				<h1 class="header">Your Outfit Today</h1>
 
+
 				<!-- This is the place where the javascript inserts the weather information -->
 				<section>
 			
 				</section>
-				
 
-				<img src = "https://requestreduce.org/images/sun-clipart-public-domain-10.png">
+
+				<!-- The section where the outfit is displayed -->
+				<div>
+
+				</div>
+
+
 			</div>
 		</div>
 		

@@ -87,3 +87,8 @@ h1
 {
 	text-align: center;
 }
+
+section
+{
+	max-width: 40%;
+}
