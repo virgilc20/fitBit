@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,7 +99,7 @@
 								//Animation complete. also, why is this h4 v. h2?
 							});
 							$('#wardrobe_form')[0].reset()
-							$('#subtype').html("<select><option value='select'>Select</option></select>")
+							$('#subtype').html("<select><option value='select'>Select</option></select>") //comment out for reset test
 							$('#subsubtype').html("<select><option value='select'>Select</option></select>")
 						}
 					});
