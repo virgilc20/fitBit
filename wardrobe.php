@@ -63,6 +63,7 @@
 				<td>Select Color</td>
 				<td>
 					<input id="color" type="color" name="color" value="#ff0000">
+					<input type="hidden" id="user" value="<?=$_SESSION['userId'];?>"> <!--hidden for ajax pass-->
 				</td>
 			</tr>
 
@@ -82,24 +83,24 @@
 		$(function() {
 			$(".button").click(function() {
 
-					//focus?
-					var attire = $("#attire").val(); //check if empty, further validation required
+					var attire = $("#attire").val(); 
 						if (attire == "select" || attire == null) {
 							alert("Please fully select an article of clothing.");
 							return false;
 						}
 					var color = $("#color").val();
+					var user = $("#user").val();
 
 					$.ajax({
 						type: "POST",
 						url: "wardrobeUpdate.php",
-						data: {attire: attire, color: color},
+						data: {attire: attire, color: color, user: user},
 						success: function() {
 							$('#intro').html("<h4 id='intro'>Succesfully added! Add another?</h4>").hide().fadeIn("1500", function() {
-								//Animation complete. also, why is this h4 v. h2?
+								//Animation complete. 
 							});
 							$('#wardrobe_form')[0].reset()
-							$('#subtype').html("<select><option value='select'>Select</option></select>") //comment out for reset test
+							$('#subtype').html("<select><option value='select'>Select</option></select>")
 							$('#subsubtype').html("<select><option value='select'>Select</option></select>")
 						}
 					});
@@ -107,12 +108,7 @@
 					return false;
 			});
 		});
-	</script>
 
-
-
-
-	<script type="text/javascript">
 		function changeType() {
 			var xmlhttp = new XMLHttpRequest();
 			xmlhttp.open("GET", "ajax.php?type="+document.getElementById("typedd").value, false);

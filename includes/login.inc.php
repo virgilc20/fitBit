@@ -14,7 +14,7 @@ if (isset($_POST['login-submit'])) {
 
 
 
-		$sql = "SELECT * FROM pjiang_users WHERE uidUsers=? OR emailUsers=?;";
+		$sql = "SELECT * FROM pjiang_litfit_users WHERE uidUsers=? OR emailUsers=?;";
 		$stmt = mysqli_stmt_init($conn);
 
 		if (!mysqli_stmt_prepare($stmt, $sql)) {
