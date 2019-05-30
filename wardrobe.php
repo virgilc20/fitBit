@@ -78,6 +78,32 @@
 		</table>
 	</form>	
 
+	
+	<div id="display">
+	<?php
+		$userId = $_SESSION['userId'];
+
+		$sql = "SELECT * FROM pjiang_litfit_wardrobe WHERE userId = $userId";
+		$result = mysqli_query($conn, $sql);
+
+		if (mysqli_num_rows($result) > 0) {
+			while ($row = mysqli_fetch_assoc($result)) {
+				echo "<p>";
+				echo $row['userId'];
+				echo "<br>";
+				echo $row['attireId'];
+				echo "<br>";
+				echo $row['color'];
+				echo "</p>";
+			}
+		}
+		else {
+			echo "nothing here yet!";
+		}
+
+	?>
+	</div>
+
 
 	<script>
 		$(function() {
@@ -105,13 +131,15 @@
 						}
 					});
 
+					$("#display").load("wardrobeDisplay.php");
+
 					return false;
 			});
 		});
 
 		function changeType() {
 			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.open("GET", "ajax.php?type="+document.getElementById("typedd").value, false);
+			xmlhttp.open("GET", "wardrobeSubtype.php?type="+document.getElementById("typedd").value, false);
 			xmlhttp.send(null);
 			document.getElementById("subtype").innerHTML=xmlhttp.responseText;
 			document.getElementById("subsubtype").innerHTML="<select><option value='select'>Select</option></select>";
@@ -120,7 +148,7 @@
 		function changeSubtype() {
 
 			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.open("GET", "ajax.php?subtype="+document.getElementById("subtypedd").value, false);
+			xmlhttp.open("GET", "wardrobeSubsubtype.php?subtype="+document.getElementById("subtypedd").value, false);
 			xmlhttp.send(null);
 			document.getElementById("subsubtype").innerHTML=xmlhttp.responseText;
 		}
