@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href = "index.css">
 
 	<div class="topnav">
-		<a class="left" href ="profile.php">DASHBOARD</a>
+		<a class="left" href ="index.php">DASHBOARD</a>
     	<a class="left" href="wardrobe.php">WARDROBE</a>
     	<a class="left" href="login.php"> <?php echo "("; echo $_SESSION['userUid']; echo ") ";?>LOGIN/LOGOUT</a>
   	</div>
@@ -179,6 +179,7 @@
 			<?php
 				require("includes/dbh.inc.php");
 					// $res = mysqli_query($conn, "SELECT 'pjiang_litfit_wardrobe.id', 'pjiang_litfit_wardrobe.color', 'pjiang_litfit_attire_list.type', 'pjiang_litfit_attire_list.subtype', 'pjiang_litfit_attire_list.subsubtype', 'pjiang_litfit_attire_list.weight', 'pjiang_litfit_attire_list.formality',FROM 'pjiang_litfit_wardrobe' LEFT JOIN 'pjiang_litfit_attire_list' ON 'pjiang_litfit_wardrobe.attireid' = 'pjiang_litfit_attire_list.id' ORDER BY 'pjiang_litfit_attire_list.id'");
+				
 				$sql =  "SELECT pjiang_litfit_wardrobe.wardrobeId, pjiang_litfit_wardrobe.color, pjiang_litfit_attire_list.type, pjiang_litfit_attire_list.subtype, pjiang_litfit_attire_list.subsubtype, pjiang_litfit_attire_list.weight, pjiang_litfit_attire_list.formality FROM pjiang_litfit_wardrobe LEFT JOIN pjiang_litfit_attire_list ON pjiang_litfit_wardrobe.attireid = pjiang_litfit_attire_list.id LEFT JOIN pjiang_litfit_users ON pjiang_litfit_wardrobe.userId = pjiang_litfit_users.idUsers WHERE pjiang_litfit_wardrobe.userId = ". $_SESSION['userId'];
 				$result = mysqli_query($conn, $sql);
 				while($row = mysqli_fetch_assoc($result))
