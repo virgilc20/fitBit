@@ -30,7 +30,7 @@
   		<div id='mainblock'>
   		<?php
   		if (!isset($_SESSION['userId'])) {
-	  		echo "<h3>Welcome to Outfit Generator! Please sign up or log in before continuing.</h3>";
+	  		echo "<h3>Welcome to LitFit! Please sign up or log in before continuing.</h3>";
 	  	}
 	  	?>
 	
