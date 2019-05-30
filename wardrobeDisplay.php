@@ -10,7 +10,6 @@
 		if (mysqli_num_rows($result) > 0) {
 			while ($row = mysqli_fetch_assoc($result)) {
 				echo "<tr>";
-					echo "<td>"; echo $row['wardrobeId']; echo "</td>";
 					echo "<td>"; echo $row['subsubtype']; echo "</td>";
 					echo "<td> ("; echo $row['subtype']; echo ") </td>";
 					echo "<td>"; echo $row['color']; echo "</td>";
@@ -31,7 +30,6 @@
 		if (mysqli_num_rows($result) > 0) {
 			while ($row = mysqli_fetch_assoc($result)) {
 				echo "<tr>";
-					echo "<td>"; echo $row['wardrobeId']; echo "</td>";
 					echo "<td>"; echo $row['subsubtype']; echo "</td>";
 					echo "<td> ("; echo $row['subtype']; echo ") </td>";
 					echo "<td>"; echo $row['color']; echo "</td>";
@@ -52,7 +50,6 @@
 		if (mysqli_num_rows($result) > 0) {
 			while ($row = mysqli_fetch_assoc($result)) {
 				echo "<tr>";
-					echo "<td>"; echo $row['wardrobeId']; echo "</td>";
 					echo "<td>"; echo $row['subsubtype']; echo "</td>";
 					echo "<td> ("; echo $row['subtype']; echo ") </td>";
 					echo "<td>"; echo $row['color']; echo "</td>";

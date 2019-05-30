@@ -1,3 +1,12 @@
+<?php
+	session_start();
+
+	if (!isset($_SESSION['userId'])) {
+		header("Location: login.php?error=Please sign up or log in first.");
+		exit();
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,12 +111,12 @@
 	</script>
 
 <body>
-	<link rel="stylesheet" href = "index.css">
+	<link rel="stylesheet" href="index.css">
 
 	<div class="topnav">
-		<a class="left" href="login.php">LOGIN/LOGOUT</a>
-		<a class="left" href ="profile.php">DASHBOARD</a>
+		<a class="left" href ="index.php">DASHBOARD</a>
     	<a class="left" href="wardrobe.php">WARDROBE</a>
+    	<a class="left" href="login.php"> <?php echo "("; echo $_SESSION['userUid']; echo ") ";?>LOGIN/LOGOUT</a>
   	</div>
 
 	<div>

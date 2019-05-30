@@ -1,6 +1,12 @@
 <?php
 	session_start();
+
+	if (!isset($_SESSION['userId'])) {
+		header("Location: login.php?error=Please sign up or log in first.");
+		exit();
+	}
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +14,15 @@
 	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script> <!-- microsoft cdn jquery -->
 </head>
 <body>
+	<link rel="stylesheet" href="wardrobe.css">
+
+	<div class="topnav">
+		<a class="corner" href ="index.php">DASHBOARD</a>
+    	<a class="corner" href="wardrobe.php">WARDROBE</a>
+    	<a class="corner" href="login.php"> <?php echo "("; echo $_SESSION['userUid']; echo ") ";?>LOGIN/LOGOUT</a>
+  	</div>
+
+  	<div class="split left">  	
 	<h2 id="intro">Add Clothes to your Wardrobe!</h2>
 
 	<?php
@@ -70,15 +85,16 @@
 
 			<tr>
 				<td>
-					<input type="submit" name="submit" class="button" id="submit_btn" value="send">
+					<input type="submit" name="submit" class="button" id="submit_btn" value="Send it!">
 				</td>	
 			</tr>
 
 
 		</table>
 	</form>	
+	</div>
 
-	
+	<div class="split right">
 	<div id="display">
 	<?php
 		$userId = $_SESSION['userId'];
@@ -89,7 +105,6 @@
 			if (mysqli_num_rows($result) > 0) {
 				while ($row = mysqli_fetch_assoc($result)) {
 					echo "<tr>";
-						echo "<td>"; echo $row['wardrobeId']; echo "</td>";
 						echo "<td>"; echo $row['subsubtype']; echo "</td>";
 						echo "<td> ("; echo $row['subtype']; echo ") </td>";
 						echo "<td>"; echo $row['color']; echo "</td>";
@@ -110,7 +125,6 @@
 			if (mysqli_num_rows($result) > 0) {
 				while ($row = mysqli_fetch_assoc($result)) {
 					echo "<tr>";
-						echo "<td>"; echo $row['wardrobeId']; echo "</td>";
 						echo "<td>"; echo $row['subsubtype']; echo "</td>";
 						echo "<td> ("; echo $row['subtype']; echo ") </td>";
 						echo "<td>"; echo $row['color']; echo "</td>";
@@ -131,7 +145,6 @@
 			if (mysqli_num_rows($result) > 0) {
 				while ($row = mysqli_fetch_assoc($result)) {
 					echo "<tr>";
-						echo "<td>"; echo $row['wardrobeId']; echo "</td>";
 						echo "<td>"; echo $row['subsubtype']; echo "</td>";
 						echo "<td> ("; echo $row['subtype']; echo ") </td>";
 						echo "<td>"; echo $row['color']; echo "</td>";
@@ -145,6 +158,7 @@
 			}
 		echo "</table>";
 	?>
+	</div>
 	</div>
 
 
