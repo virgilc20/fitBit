@@ -205,7 +205,9 @@
 					url: "wardrobeDelete.php",
 					data: {wardrobeId: wardrobeId},
 					success: function() {
-
+						$('#intro').html("<h4 id='intro'>Succesfully deleted.</h4>").hide().fadeIn("1500", function() {
+							//Animation complete. 
+						});
 					}
 				});
 
