@@ -68,4 +68,33 @@ section p{
 	margin: 20px;
 	left: 20px;
 	right: 20px;
+    max-width: 33%;
+    float:left;
+}
+#fit1
+{
+    padding: 20px;
+    margin: 20px;
+    left: 20px;
+    right: 20px;
+    float:left;
+}
+#fit2
+{
+    padding: 20px;
+    margin: 20px;
+    left: 20px;
+    right: 20px;
+    float:left;
+}
+#fit3
+{
+    padding: 20px;
+    margin: 20px;
+    left: 20px;
+    right: 20px;
+    float:left;
+}
+table {
+    margin: 40px 0;
 }
