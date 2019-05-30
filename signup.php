@@ -20,7 +20,3 @@
 			<button type="submit" name="signup-submit">Signup</button>
 		</form>
 	</main>
-
-<?php
-	require "footer.php";
-?>
