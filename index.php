@@ -195,64 +195,83 @@
 			outfits.push(getMono(wardrobe));
 			outfits.push(getComp(wardrobe));
 			var outfit1 = [];
+			if(outfits[0] == null)
+			{
+				outfit1.push('<p> Please add more clothing; there are no current acceptable matches. </p>');
+			}
+			else
+			{
 			outfit1.push('<tr>');
 			if(outfits[0].jacket != null)
 			{
-				outfit1.push('<p>' + outfits[0].jacket.subsubtype + '</td>' + '<td> (' + outfits[0].jacket.subtype + ') </td>','<td style = color:'+ outfits[0].jacket.colorHex + '>'+ outfits[0].jacket.colorHex + '</td> </p> <p>');
+					outfit1.push('<p>' + outfits[0].jacket.subsubtype + '</td>' + '<td> (' + outfits[0].jacket.subtype + ') </td>','<td style = color:'+ outfits[0].jacket.colorHex + '>'+ outfits[0].jacket.colorHex + '</td> </p> <p>');
 
-			}	
-			if(outfits[0].sweater != null)
-			{
-				outfit1.push('<td>' + outfits[0].sweater.subsubtype + '</td>' + '<td> (' + outfits[0].sweater.subtype + ') </td>','<td style = color:' + outfits[0].sweater.colorHex + '>'+ outfits[0].sweater.colorHex + '</td> </p> <p>');
+				}	
+				if(outfits[0].sweater != null)
+				{
+					outfit1.push('<td>' + outfits[0].sweater.subsubtype + '</td>' + '<td> (' + outfits[0].sweater.subtype + ') </td>','<td style = color:' + outfits[0].sweater.colorHex + '>'+ outfits[0].sweater.colorHex + '</td> </p> <p>');
 
+				}
+				if(outfits[0].shirt != null)
+				{
+					outfit1.push('<td>' + outfits[0].shirt.subsubtype + '</td>' + '<td> (' + outfits[0].shirt.subtype + ') </td>','<td style = color:' +  outfits[0].shirt.colorHex + '>'+ outfits[0].shirt.colorHex + '</td></p> <p>');
+
+				}
+				outfit1.push('<td>' + outfits[0].pants.subsubtype + '</td>' + '<td> (' + outfits[0].pants.subtype + ') </td>','<td style = color:' + outfits[0].pants.colorHex + '>'+ outfits[0].pants.colorHex + '</td></p> <p>');
+				outfit1.push('<td>' + outfits[0].shoes.subsubtype + '</td>' + '<td> (' + outfits[0].shoes.subtype + ') </td>','<td style = color:' + outfits[0].shoes.colorHex + '>'+ outfits[0].shoes.colorHex + '</td></p> <p>');
 			}
-			if(outfits[0].shirt != null)
+			if(outfits[1] == null)
 			{
-				outfit1.push('<td>' + outfits[0].shirt.subsubtype + '</td>' + '<td> (' + outfits[0].shirt.subtype + ') </td>','<td style = color:' +  outfits[0].shirt.colorHex + '>'+ outfits[0].shirt.colorHex + '</td></p> <p>');
-
+				outfit1.push('<p> Please add more clothing; there are no current acceptable matches. </p>');
 			}
-			outfit1.push('<td>' + outfits[0].pants.subsubtype + '</td>' + '<td> (' + outfits[0].pants.subtype + ') </td>','<td style = color:' + outfits[0].pants.colorHex + '>'+ outfits[0].pants.colorHex + '</td></p> <p>');
-			outfit1.push('<td>' + outfits[0].shoes.subsubtype + '</td>' + '<td> (' + outfits[0].shoes.subtype + ') </td>','<td style = color:' + outfits[0].shoes.colorHex + '>'+ outfits[0].shoes.colorHex + '</td></p> <p>');
-
-			var outfit2 = [];
-			outfit2.push('<tr>');
-			if(outfits[1].jacket != null)
+			else
 			{
-				outfit2.push('<td>' + outfits[1].jacket.subsubtype + '</td>' + '<td> (' + outfits[1].jacket.subtype + ') </td>','<td style = color:' + outfits[1].jacket.colorHex + '>'+ outfits[1].jacket.colorHex + '</td></p> <p>');
+				var outfit2 = [];
+				outfit2.push('<tr>');
+				if(outfits[1].jacket != null)
+				{
+					outfit2.push('<td>' + outfits[1].jacket.subsubtype + '</td>' + '<td> (' + outfits[1].jacket.subtype + ') </td>','<td style = color:' + outfits[1].jacket.colorHex + '>'+ outfits[1].jacket.colorHex + '</td></p> <p>');
 
-			}	
-			if(outfits[1].sweater != null)
-			{
-				outfit2.push('<td>' + outfits[1].sweater.subsubtype + '</td>' + '<td> (' + outfits[1].sweater.subtype + ') </td>','<td style = color:' + outfits[1].sweater.colorHex + '>'+ outfits[1].sweater.colorHex + '</td></p> <p>');
+				}	
+				if(outfits[1].sweater != null)
+				{
+					outfit2.push('<td>' + outfits[1].sweater.subsubtype + '</td>' + '<td> (' + outfits[1].sweater.subtype + ') </td>','<td style = color:' + outfits[1].sweater.colorHex + '>'+ outfits[1].sweater.colorHex + '</td></p> <p>');
 
+				}
+				if(outfits[1].shirt != null)
+				{
+					outfit2.push('<td>' + outfits[1].shirt.subsubtype + '</td>' + '<td> (' + outfits[1].shirt.subtype + ') </td>','<td style = color:' + outfits[1].shirt.colorHex + '>'+ outfits[1].shirt.colorHex + '</td></p> <p>');
+
+				}
+				outfit2.push('<td>' + outfits[1].pants.subsubtype + '</td>' + '<td> (' + outfits[1].pants.subtype + ') </td>','<td style = color:' + outfits[1].pants.colorHex + '>'+ outfits[1].pants.colorHex + '</td></p> <p>');
+				outfit2.push('<td>' + outfits[1].shoes.subsubtype + '</td>' + '<td> (' + outfits[1].shoes.subtype + ') </td>','<td style = color:' + outfits[1].shoes.colorHex + '>'+ outfits[1].shoes.colorHex + '</td></p> <p>');
 			}
-			if(outfits[1].shirt != null)
+			if(outfits[2] == null)
 			{
-				outfit2.push('<td>' + outfits[1].shirt.subsubtype + '</td>' + '<td> (' + outfits[1].shirt.subtype + ') </td>','<td style = color:' + outfits[1].shirt.colorHex + '>'+ outfits[1].shirt.colorHex + '</td></p> <p>');
-
+				outfit1.push('<p> Please add more clothing; there are no current acceptable matches. </p>');
 			}
-			outfit2.push('<td>' + outfits[1].pants.subsubtype + '</td>' + '<td> (' + outfits[1].pants.subtype + ') </td>','<td style = color:' + outfits[1].pants.colorHex + '>'+ outfits[1].pants.colorHex + '</td></p> <p>');
-			outfit2.push('<td>' + outfits[1].shoes.subsubtype + '</td>' + '<td> (' + outfits[1].shoes.subtype + ') </td>','<td style = color:' + outfits[1].shoes.colorHex + '>'+ outfits[1].shoes.colorHex + '</td></p> <p>');
-
-			var outfit3 = [];
-			outfit3.push('<tr>');
-			if(outfits[2].jacket != null)
+			else
 			{
-				outfit3.push('<td>' + outfits[2].jacket.subsubtype + '</td>','<td> (' + outfits[2].jacket.subtype + ') </td>','<td style = color:' + outfits[2].jacket.colorHex + '>'+ outfits[2].jacket.colorHex + '</td></p> <p>');
+				var outfit3 = [];
+				outfit3.push('<tr>');
+				if(outfits[2].jacket != null)
+				{
+					outfit3.push('<td>' + outfits[2].jacket.subsubtype + '</td>','<td> (' + outfits[2].jacket.subtype + ') </td>','<td style = color:' + outfits[2].jacket.colorHex + '>'+ outfits[2].jacket.colorHex + '</td></p> <p>');
 
-			}	
-			if(outfits[2].sweater != null)
-			{
-				outfit3.push('<td>' + outfits[2].sweater.subsubtype + '</td>' + '<td> (' + outfits[2].sweater.subtype + ') </td>','<td style = color:' + outfits[2].sweater.colorHex + '>'+ outfits[2].sweater.colorHex + '</td></p> <p>');
+				}	
+				if(outfits[2].sweater != null)
+				{
+					outfit3.push('<td>' + outfits[2].sweater.subsubtype + '</td>' + '<td> (' + outfits[2].sweater.subtype + ') </td>','<td style = color:' + outfits[2].sweater.colorHex + '>'+ outfits[2].sweater.colorHex + '</td></p> <p>');
 
+				}
+				if(outfits[2].shirt != null)
+				{
+					outfit3.push('<td>' + outfits[2].shirt.subsubtype + '</td>' + '<td> (' + outfits[2].shirt.subtype + ') </td>','<td style = color:' + outfits[2].shirt.colorHex + '>'+ outfits[2].shirt.colorHex + '</td>');
+
+				}
+				outfit3.push('<td>' + outfits[2].pants.subsubtype + '</td>' + '<td> (' + outfits[2].pants.subtype + ') </td>','<td style = color:' + outfits[2].pants.colorHex + '>'+ outfits[2].pants.colorHex + '</td></p> <p>')
+				outfit3.push('<td>' + outfits[2].shoes.subsubtype + '</td>' + '<td> (' + outfits[2].shoes.subtype + ') </td>','<td style = color:' + outfits[2].shoes.colorHex + '>'+ outfits[2].shoes.colorHex + '</td></p> <p>');
 			}
-			if(outfits[2].shirt != null)
-			{
-				outfit3.push('<td>' + outfits[2].shirt.subsubtype + '</td>' + '<td> (' + outfits[2].shirt.subtype + ') </td>','<td style = color:' + outfits[2].shirt.colorHex + '>'+ outfits[2].shirt.colorHex + '</td>');
-
-			}
-			outfit3.push('<td>' + outfits[2].pants.subsubtype + '</td>' + '<td> (' + outfits[2].pants.subtype + ') </td>','<td style = color:' + outfits[2].pants.colorHex + '>'+ outfits[2].pants.colorHex + '</td></p> <p>')
-			outfit3.push('<td>' + outfits[2].shoes.subsubtype + '</td>' + '<td> (' + outfits[2].shoes.subtype + ') </td>','<td style = color:' + outfits[2].shoes.colorHex + '>'+ outfits[2].shoes.colorHex + '</td></p> <p>');
 			var htmlString1 = outfit1.join('');
 			var htmlString2 = outfit2.join('');
 			var htmlString3 = outfit3.join('');
