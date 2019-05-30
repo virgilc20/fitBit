@@ -7,20 +7,24 @@ if (isset($_POST['login-submit'])) {
 	$password = $_POST['pwd'];
 
 	if (empty($mailuid) || empty($password)) {
-		header("Location: ../index.php?error=emptyfields");
+		header("Location: ../login.php?error=emptyfields");
 		exit();
 	}
 	else {
-		$sql = "SELECT * FROM pjiang_users WHERE uidUsers=? OR emailUsers=?;";
+
+
+
+		$sql = "SELECT * FROM pjiang_litfit_users WHERE uidUsers=? OR emailUsers=?;";
 		$stmt = mysqli_stmt_init($conn);
 
 		if (!mysqli_stmt_prepare($stmt, $sql)) {
-			header("Location: ../index.php?error=sqlerror");
+			header("Location: ../login.php?error=sqlerror");
 			exit();
 		}
 		else {
 			mysqli_stmt_bind_param($stmt, "ss", $mailuid, $mailuid);
 			mysqli_stmt_execute($stmt);
+			mysqli_stmt_store_result($stmt); //store results
 
 			mysqli_stmt_bind_result($stmt, $dbIdUsers, $dbUidUsers, $dbEmailUsers, $dbPwdUsers);
 			while (mysqli_stmt_fetch($stmt)) {
@@ -30,11 +34,11 @@ if (isset($_POST['login-submit'])) {
 				$pwdUsers = $dbPwdUsers;
 			}
 
-			if (!empty($idUsers) && !empty($uidUsers) && !empty($emailUsers) && !empty($pwdUsers)) { //why is pwdUsers returning empty?
+			if (!empty($idUsers) && !empty($uidUsers) && !empty($emailUsers) && !empty($pwdUsers)) { 
 
 				$pwdCheck = password_verify($password, $pwdUsers);
 				if ($pwdCheck == false) {																					
-					header("Location: ../index.php?error=wrongpwd");
+					header("Location: ../login.php?error=wrongpwd&mailuid=".$mailuid);
 					exit();
 				}
 				else if ($pwdCheck == true) {
@@ -46,25 +50,19 @@ if (isset($_POST['login-submit'])) {
 					exit();
 				}
 				else {
-					header("Location: ../index.php?error=wrongpwd");
+					header("Location: ../login.php?error=wrongpwd&&mailuid=".$mailuid);
 					exit();
 				}
 			}
 
 			else {
-				//header("Location: ../index.php?error=nouser");
-				echo($idUsers);
-				echo($uidUsers);
-				echo($emailUsers);
-				echo("TEST");
-				echo($pwdUsers);
-				echo("&&&TEST");
-				//exit();
+				header("Location: ../login.php?error=nouser");
+				exit();
 			}
 		}
 	}
 }
 else {
-	header("Location: ../index.php?");
+	header("Location: ../login.php");
 	exit();
 }

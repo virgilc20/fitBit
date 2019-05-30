@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 28, 2019 at 05:15 PM
+-- Generation Time: May 29, 2019 at 09:15 AM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.2.1
 
@@ -25,14 +25,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pjiang_litfit_wardrobe`
+-- Table structure for table `pjiang_litfit_users`
 --
 
-CREATE TABLE `pjiang_litfit_wardrobe` (
-  `id` int(11) NOT NULL,
-  `userId` int(11) NOT NULL,
-  `attireId` int(11) NOT NULL,
-  `color` varchar(50) NOT NULL
+CREATE TABLE `pjiang_litfit_users` (
+  `idUsers` int(11) NOT NULL,
+  `uidUsers` tinytext NOT NULL,
+  `emailUsers` tinytext NOT NULL,
+  `pwdUsers` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -40,20 +40,20 @@ CREATE TABLE `pjiang_litfit_wardrobe` (
 --
 
 --
--- Indexes for table `pjiang_litfit_wardrobe`
+-- Indexes for table `pjiang_litfit_users`
 --
-ALTER TABLE `pjiang_litfit_wardrobe`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `pjiang_litfit_users`
+  ADD PRIMARY KEY (`idUsers`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `pjiang_litfit_wardrobe`
+-- AUTO_INCREMENT for table `pjiang_litfit_users`
 --
-ALTER TABLE `pjiang_litfit_wardrobe`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `pjiang_litfit_users`
+  MODIFY `idUsers` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
