@@ -79,7 +79,7 @@
 			} else if (data["weather"][0]["description"].localeCompare('overcast clouds') == 0 || data["weather"][0]["description"].localeCompare('few clouds') == 0 || data["weather"][0]["description"].localeCompare('broken clouds') == 0 || data["weather"][0]["description"].localeCompare('scattered clouds') == 0 ) {
 				img.src = 'http://images.clipartpanda.com/cloud-clip-art-rgtaylor_csc_net_wan_cloud.png';
 
-			} else if (data["weather"][0]["description"].localeCompare('light rain') == 0 || data["weather"][0]["description"].localeCompare('moderate rain') == 0 || data["weather"][0]["description"].localeCompare('heavy intensity rain') == 0) {
+			} else if (data["weather"][0]["description"].localeCompare('light rain') == 0 || data["weather"][0]["description"].localeCompare('moderate rain') == 0 || data["weather"][0]["description"].localeCompare('heavy intensity rain') == 0 || data["weather"][0]["description"].localeCompare('mist') == 0) {
 				img.src = 'http://clipart-library.com/data_images/395646.png';
 			
 			} else if (data["weather"][0]["description"].localeCompare('snow') == 0 || data["weather"][0]["description"].localeCompare('light snow') == 0 || data["weather"][0]["description"].localeCompare('heavy snow') == 0) {
