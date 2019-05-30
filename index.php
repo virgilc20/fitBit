@@ -73,7 +73,7 @@
 
 			var img = new Image();
 
-			if(data["weather"][0]["description"].localeCompare('sky is clear') == 0){
+			if(data["weather"][0]["description"].localeCompare('clear sky') == 0){
 				img.src = 'https://st.depositphotos.com/1216158/3267/v/950/depositphotos_32676701-stock-illustration-sun-clipart.jpg';
 
 			} else if (data["weather"][0]["description"].localeCompare('overcast clouds') == 0 || data["weather"][0]["description"].localeCompare('few clouds') == 0 || data["weather"][0]["description"].localeCompare('broken clouds') == 0 || data["weather"][0]["description"].localeCompare('scattered clouds') == 0 ) {
@@ -103,21 +103,23 @@
 
 <body>
 	<link rel="stylesheet" href = "index.css">
-	<ul>
-		<li class="current"><a href ="profile.php">DASHBOARD</a></li>
-		<li><a href ="weather.php">WEATHER</a></li>
-		<li><a href ="wardrobe.php">WARDROBE</a></li>
-		<li><a href ="outfits.php">OUTFITS</a></li>
-		<li><a href ="profile.php">PROFILE</a></li>
-	</ul>
-	<div class="wrapper">
+
+	<div class="topnav">
+		<a class="left" href ="profile.php">DASHBOARD</a>
+    	<a class="left" href="weather.php">WEATHER</a>
+    	<a class="left" href="wardrobe.php">WARDROBE</a>
+    	<a class="left" href="outfits.php">OUTFITS</a>
+    	<a class="left" href="profile.php">PROFILE</a>
+  	</div>
+
+	<div>
 		<div>
-			<div class="innercontent">
+			<div>
 				<h1 class="header">Your Outfit Today</h1>
 
 
 				<!-- This is the place where the javascript inserts the weather information -->
-				<section>
+				<section class="weatherInfo">
 			
 				</section>
 
@@ -125,6 +127,7 @@
 				<!-- The section where the outfit is displayed -->
 				<div>
 
+					
 				</div>
 
 
