@@ -12,7 +12,7 @@
 				echo "<tr>";
 					echo "<td>"; echo $row['subsubtype']; echo "</td>";
 					echo "<td> ("; echo $row['subtype']; echo ") </td>";
-					echo "<td style = color:"; echo $row[color]; echo ">"; echo $row['color']; echo "</td>";
+					echo "<td style = color:"; echo $row['color']; echo ">"; echo $row['color']; echo "</td>";
 					echo "<td>"; ?> <button id='delete' value='<?php echo $row['wardrobeId'] ?>'>X</button> <?php echo "</td>";
 					echo "<script>"; ?> var elem = document.getElementById('delete'); elem.id = 'delete'.concat(<?php echo $row['wardrobeId']?>); <?php echo "</script>";
 				echo "</tr>";
@@ -32,7 +32,7 @@
 				echo "<tr>";
 					echo "<td>"; echo $row['subsubtype']; echo "</td>";
 					echo "<td> ("; echo $row['subtype']; echo ") </td>";
-					echo "<td style = color:"; echo $row[color]; echo ">"; echo $row['color']; echo "</td>";
+					echo "<td style = color:"; echo $row['color']; echo ">"; echo $row['color']; echo "</td>";
 					echo "<td>"; ?> <button id='delete' value='<?php echo $row['wardrobeId'] ?>'>X</button> <?php echo "</td>";
 					echo "<script>"; ?> var elem = document.getElementById('delete'); elem.id = 'delete'.concat(<?php echo $row['wardrobeId']?>); <?php echo "</script>";
 				echo "</tr>";
@@ -52,7 +52,7 @@
 				echo "<tr>";
 					echo "<td>"; echo $row['subsubtype']; echo "</td>";
 					echo "<td> ("; echo $row['subtype']; echo ") </td>";
-					echo "<td style = color:"; echo $row[color]; echo ">"; echo $row['color']; echo "</td>";
+					echo "<td style = color:"; echo $row['color']; echo ">"; echo $row['color']; echo "</td>";
 					echo "<td>"; ?> <button id='delete' value='<?php echo $row['wardrobeId'] ?>'>X</button> <?php echo "</td>";
 					echo "<script>"; ?> var elem = document.getElementById('deletetop'); elem.id = 'delete'.concat(<?php echo $row['wardrobeId']?>); <?php echo "</script>";
 				echo "</tr>";
@@ -75,7 +75,9 @@
 				url: "wardrobeDelete.php",
 				data: {wardrobeId: wardrobeId},
 				success: function() {
-
+					$('#intro').html("<h4 id='intro'>Succesfully deleted.</h4>").hide().fadeIn("1500", function() {
+						//Animation complete. 
+					});
 				}
 			});
 
