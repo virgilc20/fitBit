@@ -83,24 +83,67 @@
 	<?php
 		$userId = $_SESSION['userId'];
 
-		$sql = "SELECT * FROM pjiang_litfit_wardrobe WHERE userId = $userId";
+		$sql = "SELECT wardrobeId, type, subtype, subsubtype, color FROM pjiang_litfit_wardrobe w JOIN pjiang_litfit_attire_list a ON w.attireId = a.id WHERE userId = $userId AND type = 'Top'";
 		$result = mysqli_query($conn, $sql);
-
-		if (mysqli_num_rows($result) > 0) {
-			while ($row = mysqli_fetch_assoc($result)) {
-				echo "<p>";
-				echo $row['userId'];
-				echo "<br>";
-				echo $row['attireId'];
-				echo "<br>";
-				echo $row['color'];
-				echo "</p>";
+		echo "<table>";
+			if (mysqli_num_rows($result) > 0) {
+				while ($row = mysqli_fetch_assoc($result)) {
+					echo "<tr>";
+						echo "<td>"; echo $row['wardrobeId']; echo "</td>";
+						echo "<td>"; echo $row['subsubtype']; echo "</td>";
+						echo "<td> ("; echo $row['subtype']; echo ") </td>";
+						echo "<td>"; echo $row['color']; echo "</td>";
+						echo "<td>"; ?> <button id='delete' value='<?php echo $row['wardrobeId'] ?>'>X</button> <?php echo "</td>";
+						echo "<script>"; ?> var elem = document.getElementById('delete'); elem.id = 'delete'.concat(<?php echo $row['wardrobeId']?>); <?php echo "</script>";
+					echo "</tr>";
+				}
 			}
-		}
-		else {
-			echo "nothing here yet!";
-		}
+			else {
+				echo "No tops yet!";
+			}
+		echo "</table>";
 
+
+		$sql = "SELECT wardrobeId, type, subtype, subsubtype, color FROM pjiang_litfit_wardrobe w JOIN pjiang_litfit_attire_list a ON w.attireId = a.id WHERE userId = $userId AND type = 'Bottom'";
+		$result = mysqli_query($conn, $sql);
+		echo "<table>";
+			if (mysqli_num_rows($result) > 0) {
+				while ($row = mysqli_fetch_assoc($result)) {
+					echo "<tr>";
+						echo "<td>"; echo $row['wardrobeId']; echo "</td>";
+						echo "<td>"; echo $row['subsubtype']; echo "</td>";
+						echo "<td> ("; echo $row['subtype']; echo ") </td>";
+						echo "<td>"; echo $row['color']; echo "</td>";
+						echo "<td>"; ?> <button id='delete' value='<?php echo $row['wardrobeId'] ?>'>X</button> <?php echo "</td>";
+						echo "<script>"; ?> var elem = document.getElementById('delete'); elem.id = 'delete'.concat(<?php echo $row['wardrobeId']?>); <?php echo "</script>";
+					echo "</tr>";
+				}
+			}
+			else {
+				echo "No bottoms yet!";
+			}
+		echo "</table>";
+
+
+		$sql = "SELECT wardrobeId, type, subtype, subsubtype, color FROM pjiang_litfit_wardrobe w JOIN pjiang_litfit_attire_list a ON w.attireId = a.id WHERE userId = $userId AND type = 'Footwear'";
+		$result = mysqli_query($conn, $sql);
+		echo "<table>";
+			if (mysqli_num_rows($result) > 0) {
+				while ($row = mysqli_fetch_assoc($result)) {
+					echo "<tr>";
+						echo "<td>"; echo $row['wardrobeId']; echo "</td>";
+						echo "<td>"; echo $row['subsubtype']; echo "</td>";
+						echo "<td> ("; echo $row['subtype']; echo ") </td>";
+						echo "<td>"; echo $row['color']; echo "</td>";
+						echo "<td>"; ?> <button id='delete' value='<?php echo $row['wardrobeId'] ?>'>X</button> <?php echo "</td>";
+						echo "<script>"; ?> var elem = document.getElementById('deletetop'); elem.id = 'delete'.concat(<?php echo $row['wardrobeId']?>); <?php echo "</script>";
+					echo "</tr>";
+				}
+			}
+			else {
+				echo "No footwear yet!";
+			}
+		echo "</table>";
 	?>
 	</div>
 
@@ -109,31 +152,49 @@
 		$(function() {
 			$(".button").click(function() {
 
-					var attire = $("#attire").val(); 
-						if (attire == "select" || attire == null) {
-							alert("Please fully select an article of clothing.");
-							return false;
-						}
-					var color = $("#color").val();
-					var user = $("#user").val();
+				var attire = $("#attire").val(); 
+					if (attire == "select" || attire == null) {
+						alert("Please fully select an article of clothing.");
+						return false;
+					}
+				var color = $("#color").val();
+				var user = $("#user").val();
 
-					$.ajax({
-						type: "POST",
-						url: "wardrobeUpdate.php",
-						data: {attire: attire, color: color, user: user},
-						success: function() {
-							$('#intro').html("<h4 id='intro'>Succesfully added! Add another?</h4>").hide().fadeIn("1500", function() {
-								//Animation complete. 
-							});
-							$('#wardrobe_form')[0].reset()
-							$('#subtype').html("<select><option value='select'>Select</option></select>")
-							$('#subsubtype').html("<select><option value='select'>Select</option></select>")
-						}
-					});
+				$.ajax({
+					type: "POST",
+					url: "wardrobeUpdate.php",
+					data: {attire: attire, color: color, user: user},
+					success: function() {
+						$('#intro').html("<h4 id='intro'>Succesfully added! Add another?</h4>").hide().fadeIn("1500", function() {
+							//Animation complete. 
+						});
+						$('#wardrobe_form')[0].reset()
+						$('#subtype').html("<select><option value='select'>Select</option></select>")
+						$('#subsubtype').html("<select><option value='select'>Select</option></select>")
+					}
+				});
 
-					$("#display").load("wardrobeDisplay.php");
+				$("#display").load("wardrobeDisplay.php"); 
 
-					return false;
+				return false;
+			});
+		});
+
+		$(function() {
+			$("button[id^='delete']").click(function() {
+
+				var wardrobeId = $(this).val(); 
+
+				$.ajax({
+					type: "POST",
+					url: "wardrobeDelete.php",
+					data: {wardrobeId: wardrobeId},
+					success: function() {
+
+					}
+				});
+
+				$("#display").load("wardrobeDisplay.php"); 
 			});
 		});
 
