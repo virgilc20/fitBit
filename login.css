@@ -1,10 +1,39 @@
 body
 {
 	min-height:100vh;
-	margin:0;
-	padding:0;
+	margin: auto;
 	font-family:"Tahoma", Geneva, sans-serif;
 
+}
+
+#mainblock
+{
+    margin: auto;
+    width: 75%;
+    text-align: center;
+    padding: 40px 0;
+}
+
+#login-button
+{
+    padding: 15px 40px;
+    margin-top: 40px;
+    margin-left: 15px;
+    font-size: 16px;
+}
+
+#logout-button
+{
+    padding: 20px 160px;
+    margin: 40px 0;
+    font-size: 20px;
+}
+
+#signup
+{
+    font-size: 36px;
+    font-style: italic;
+    margin-bottom: 100px;
 }
 
 .left {
@@ -38,63 +67,4 @@ body
 .topnav a.active {
     background-color: #4CAF50;
     color: white;
-}
-
-.ptsans{
-    font-family: 'PT Sans', sans-serif;
-}
-.header
-{
-	font-size: 100px;
-}
-
-h1
-{
-	text-align: center;
-}
-
-section img{
-	left: 20px;
-	padding: 20px;
-}
-
-section p{
-	padding: 20px;
-	left: 20px;
-}
-
-.weatherInfo {
-	padding: 20px;
-	margin: 20px;
-	left: 20px;
-	right: 20px;
-    max-width: 33%;
-    float:left;
-}
-#fit1
-{
-    padding: 20px;
-    margin: 20px;
-    left: 20px;
-    right: 20px;
-    float:left;
-}
-#fit2
-{
-    padding: 20px;
-    margin: 20px;
-    left: 20px;
-    right: 20px;
-    float:left;
-}
-#fit3
-{
-    padding: 20px;
-    margin: 20px;
-    left: 20px;
-    right: 20px;
-    float:left;
-}
-table {
-    margin: 40px 0;
 }

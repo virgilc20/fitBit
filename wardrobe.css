@@ -1,13 +1,53 @@
 body
 {
 	min-height:100vh;
-	margin:0;
-	padding:0;
+	margin: auto;
 	font-family:"Tahoma", Geneva, sans-serif;
 
 }
 
+h2{
+    margin-bottom: 35px;
+}
+
+#submit_btn
+{
+    padding: 20px 40px;
+    margin-top: 40px;
+    margin-left: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+table {
+    margin: 40px 0;
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+/* Control the left side */
 .left {
+  left: 0;
+  margin-left: 100px;
+  margin-top: 100px;
+}
+/* Control the right side */
+.right {
+  right: 0;
+  font-size: 20px;
+  margin-top: 110px;
+}
+
+
+
+.corner {
     float:left;
 }
 /* Add a black background color to the top navigation */
@@ -38,63 +78,4 @@ body
 .topnav a.active {
     background-color: #4CAF50;
     color: white;
-}
-
-.ptsans{
-    font-family: 'PT Sans', sans-serif;
-}
-.header
-{
-	font-size: 100px;
-}
-
-h1
-{
-	text-align: center;
-}
-
-section img{
-	left: 20px;
-	padding: 20px;
-}
-
-section p{
-	padding: 20px;
-	left: 20px;
-}
-
-.weatherInfo {
-	padding: 20px;
-	margin: 20px;
-	left: 20px;
-	right: 20px;
-    max-width: 33%;
-    float:left;
-}
-#fit1
-{
-    padding: 20px;
-    margin: 20px;
-    left: 20px;
-    right: 20px;
-    float:left;
-}
-#fit2
-{
-    padding: 20px;
-    margin: 20px;
-    left: 20px;
-    right: 20px;
-    float:left;
-}
-#fit3
-{
-    padding: 20px;
-    margin: 20px;
-    left: 20px;
-    right: 20px;
-    float:left;
-}
-table {
-    margin: 40px 0;
 }

@@ -1,19 +1,24 @@
+<?php 
+	if (isset($_GET['error'])) {
+		$error = $_GET['error'];
+		echo "<script>alert('$error');</script>";
+	}
+?>
+
 <?php
 	require "header.php";
 ?>
 
-	<main>
+
+		<main>
 		<?php
 			if (isset($_SESSION['userId'])) {
-				echo '<p>You are logged in!</p>';
-				print_r($_SESSION);
-			}
-			else {
-				echo '<p>You are logged out!</p>';
+				echo '<h2>'; echo $_SESSION['userUid']; echo' is currently logged in.</h2>';
 			}
 		?>
-	</main>
+		</main>
 
-<?php
-	require "footer.php";
-?>
+
+
+
+	</div>
