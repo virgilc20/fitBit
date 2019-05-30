@@ -88,7 +88,7 @@
 			}
 
 			img.height = 150;
-			img.width = 150;
+			img.width = 200;
 
 			sect.appendChild(img);
 	        sect.appendChild(description);
@@ -105,11 +105,9 @@
 	<link rel="stylesheet" href = "index.css">
 
 	<div class="topnav">
+		<a class="left" href="login.php">LOGIN/LOGOUT</a>
 		<a class="left" href ="profile.php">DASHBOARD</a>
-    	<a class="left" href="weather.php">WEATHER</a>
     	<a class="left" href="wardrobe.php">WARDROBE</a>
-    	<a class="left" href="outfits.php">OUTFITS</a>
-    	<a class="left" href="profile.php">PROFILE</a>
   	</div>
 
 	<div>
@@ -127,7 +125,7 @@
 				<!-- The section where the outfit is displayed -->
 				<div>
 
-					
+
 				</div>
 
 
