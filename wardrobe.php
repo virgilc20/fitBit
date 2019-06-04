@@ -79,7 +79,7 @@
 				<td>Select Color</td>
 				<td>
 					<input id="color" type="color" name="color" value="#ff0000">
-					<input type="hidden" id="user" value="<?=$_SESSION['userId'];?>"> <!--hidden for ajax pass-->
+					<input type="hidden" id="user" value="<?=$_SESSION['userId'];?>"> 
 				</td>
 			</tr>
 
@@ -99,65 +99,36 @@
 	<div id="display">
 	<?php
 		$userId = $_SESSION['userId'];
+		$typeDisplay = array("Top", "Bottom", "Footwear");
 
-		$sql = "SELECT wardrobeId, type, subtype, subsubtype, color FROM pjiang_litfit_wardrobe w JOIN pjiang_litfit_attire_list a ON w.attireId = a.id WHERE userId = $userId AND type = 'Top'";
-		$result = mysqli_query($conn, $sql);
-		echo "<table>";
-			if (mysqli_num_rows($result) > 0) {
-				while ($row = mysqli_fetch_assoc($result)) {
-					echo "<tr>";
-						echo "<td>"; echo $row['subsubtype']; echo "</td>";
-						echo "<td> ("; echo $row['subtype']; echo ") </td>";
-						echo "<td style = color:"; echo $row['color']; echo ">"; echo $row['color']; echo "</td>";
-						echo "<td>"; ?> <button id='delete' value='<?php echo $row['wardrobeId'] ?>'>X</button> <?php echo "</td>";
-						echo "<script>"; ?> var elem = document.getElementById('delete'); elem.id = 'delete'.concat(<?php echo $row['wardrobeId']?>); <?php echo "</script>";
-					echo "</tr>";
+		for ($i = 0; $i < count($typeDisplay); $i++) {
+			$sql = "SELECT wardrobeId, type, subtype, subsubtype, color FROM pjiang_litfit_wardrobe w JOIN pjiang_litfit_attire_list a ON w.attireId = a.id WHERE userId = $userId AND type = '$typeDisplay[$i]'";
+			$result = mysqli_query($conn, $sql);
+			echo "<table>";
+				if (mysqli_num_rows($result) > 0) {
+					while ($row = mysqli_fetch_assoc($result)) {
+						echo "<tr>";
+							echo "<td>"; echo $row['subsubtype']; echo "</td>";
+							echo "<td> ("; echo $row['subtype']; echo ") </td>";
+							echo "<td style = color:"; echo $row['color']; echo ">"; echo $row['color']; echo "</td>";
+							echo "<td>"; ?> <button id='delete' value='<?php echo $row['wardrobeId'] ?>'>X</button> <?php echo "</td>";
+							echo "<script>"; ?> var elem = document.getElementById('delete'); elem.id = 'delete'.concat(<?php echo $row['wardrobeId']?>); <?php echo "</script>";
+						echo "</tr>";
+					}
+				}
+			else {
+				if ($i == 0) {
+					echo "No tops yet!";
+				}
+				else if ($i == 1) {
+					echo "No bottoms yet!";
+				}
+				else {
+					echo "No footwear yet!";
 				}
 			}
-			else {
-				echo "No tops yet!";
-			}
-		echo "</table>";
-
-
-		$sql = "SELECT wardrobeId, type, subtype, subsubtype, color FROM pjiang_litfit_wardrobe w JOIN pjiang_litfit_attire_list a ON w.attireId = a.id WHERE userId = $userId AND type = 'Bottom'";
-		$result = mysqli_query($conn, $sql);
-		echo "<table>";
-			if (mysqli_num_rows($result) > 0) {
-				while ($row = mysqli_fetch_assoc($result)) {
-					echo "<tr>";
-						echo "<td>"; echo $row['subsubtype']; echo "</td>";
-						echo "<td> ("; echo $row['subtype']; echo ") </td>";
-						echo "<td style = color:"; echo $row['color']; echo ">"; echo $row['color']; echo "</td>";
-						echo "<td>"; ?> <button id='delete' value='<?php echo $row['wardrobeId'] ?>'>X</button> <?php echo "</td>";
-						echo "<script>"; ?> var elem = document.getElementById('delete'); elem.id = 'delete'.concat(<?php echo $row['wardrobeId']?>); <?php echo "</script>";
-					echo "</tr>";
-				}
-			}
-			else {
-				echo "No bottoms yet!";
-			}
-		echo "</table>";
-
-
-		$sql = "SELECT wardrobeId, type, subtype, subsubtype, color FROM pjiang_litfit_wardrobe w JOIN pjiang_litfit_attire_list a ON w.attireId = a.id WHERE userId = $userId AND type = 'Footwear'";
-		$result = mysqli_query($conn, $sql);
-		echo "<table>";
-			if (mysqli_num_rows($result) > 0) {
-				while ($row = mysqli_fetch_assoc($result)) {
-					echo "<tr>";
-						echo "<td>"; echo $row['subsubtype']; echo "</td>";
-						echo "<td> ("; echo $row['subtype']; echo ") </td>";
-						echo "<td style = color:"; echo $row['color']; echo ">"; echo $row['color']; echo "</td>";
-						echo "<td>"; ?> <button id='delete' value='<?php echo $row['wardrobeId'] ?>'>X</button> <?php echo "</td>";
-						echo "<script>"; ?> var elem = document.getElementById('deletetop'); elem.id = 'delete'.concat(<?php echo $row['wardrobeId']?>); <?php echo "</script>";
-					echo "</tr>";
-				}
-			}
-			else {
-				echo "No footwear yet!";
-			}
-		echo "</table>";
+			echo "</table>";
+		}
 	?>
 	</div>
 	</div>
@@ -230,10 +201,6 @@
 			xmlhttp.send(null);
 			document.getElementById("subsubtype").innerHTML=xmlhttp.responseText;
 		}
-
-	</script>	
-
-	
-
+	</script>		
 </body>
 </html>
