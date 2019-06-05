@@ -8,10 +8,11 @@
 $serverName = "localhost";
 $dBUsername = "root";
 $dBPassword = "root";
-$dBName = "1819playground";
+$dBName = "litfit";
 
 $conn = mysqli_connect($serverName, $dBUsername, $dBPassword, $dBName); 
 
 if (!$conn) {
 	die("Connection failed: ".mysqli_connect_error());
 }
+?>

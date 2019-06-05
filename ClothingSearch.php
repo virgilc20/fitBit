@@ -1,10 +1,5 @@
 <?php
 	session_start();
-
-	if (!isset($_SESSION['userId'])) {
-		header("Location: login.php?error=Please sign up or log in first.");
-		exit();
-	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,43 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Your Dashboard</title>
 </head>
-<body>
-	<link rel="stylesheet" href = "index.css">
 
-	<div class="topnav">
-		<a class="left" href ="index.php">DASHBOARD</a>
-    	<a class="left" href="wardrobe.php">WARDROBE</a>
-    	<a class="left" href="login.php"> <?php echo "("; echo $_SESSION['userUid']; echo ") ";?>LOGIN/LOGOUT</a>
-  	</div>
-
-	<div>
-		<div>
-			<div>
-				<h1 class="header">Your Outfit Today</h1>
-
-
-				<!-- This is the place where the javascript inserts the weather information -->
-				<section class="weatherInfo">
-			
-				</section>
-
-
-				<!-- The section where the outfit is displayed -->
-				<div id = "fit1">
-
-				</div>
-				<div id = "fit2">
-
-				</div>
-				<div id = "fit3">
-
-
-				</div>
-			</div>
-		</div>
-		
-	</div>
-</body>
 	<script type="text/javascript">
 		var temperature = 55;
 
@@ -125,7 +84,7 @@
 			} else if (data["weather"][0]["description"].localeCompare('overcast clouds') == 0 || data["weather"][0]["description"].localeCompare('few clouds') == 0 || data["weather"][0]["description"].localeCompare('broken clouds') == 0 || data["weather"][0]["description"].localeCompare('scattered clouds') == 0 ) {
 				img.src = 'http://images.clipartpanda.com/cloud-clip-art-rgtaylor_csc_net_wan_cloud.png';
 
-			} else if (data["weather"][0]["description"].localeCompare('light rain') == 0 || data["weather"][0]["description"].localeCompare('moderate rain') == 0 || data["weather"][0]["description"].localeCompare('heavy intensity rain') == 0 || (data["weather"][0]["description"].localeCompare('mist') == 0 )) {
+			} else if (data["weather"][0]["description"].localeCompare('light rain') == 0 || data["weather"][0]["description"].localeCompare('moderate rain') == 0 || data["weather"][0]["description"].localeCompare('heavy intensity rain') == 0) {
 				img.src = 'http://clipart-library.com/data_images/395646.png';
 			
 			} else if (data["weather"][0]["description"].localeCompare('snow') == 0 || data["weather"][0]["description"].localeCompare('light snow') == 0 || data["weather"][0]["description"].localeCompare('heavy snow') == 0) {
@@ -143,8 +102,8 @@
 	        sect.appendChild(maxTemp);
 	        sect.appendChild(wind);
 	    }
-	    		showPosition();
 
+	    showPosition();
 	    //Outfits
 	    //modified from https://stackoverflow.com/questions/46432335/hex-to-hsl-convert-javascript
 		function hexToHSL(hexCode)
@@ -184,7 +143,6 @@
 			<?php
 				require("includes/dbh.inc.php");
 					// $res = mysqli_query($conn, "SELECT 'pjiang_litfit_wardrobe.id', 'pjiang_litfit_wardrobe.color', 'pjiang_litfit_attire_list.type', 'pjiang_litfit_attire_list.subtype', 'pjiang_litfit_attire_list.subsubtype', 'pjiang_litfit_attire_list.weight', 'pjiang_litfit_attire_list.formality',FROM 'pjiang_litfit_wardrobe' LEFT JOIN 'pjiang_litfit_attire_list' ON 'pjiang_litfit_wardrobe.attireid' = 'pjiang_litfit_attire_list.id' ORDER BY 'pjiang_litfit_attire_list.id'");
-				
 				$sql =  "SELECT pjiang_litfit_wardrobe.wardrobeId, pjiang_litfit_wardrobe.color, pjiang_litfit_attire_list.type, pjiang_litfit_attire_list.subtype, pjiang_litfit_attire_list.subsubtype, pjiang_litfit_attire_list.weight, pjiang_litfit_attire_list.formality FROM pjiang_litfit_wardrobe LEFT JOIN pjiang_litfit_attire_list ON pjiang_litfit_wardrobe.attireid = pjiang_litfit_attire_list.id LEFT JOIN pjiang_litfit_users ON pjiang_litfit_wardrobe.userId = pjiang_litfit_users.idUsers WHERE pjiang_litfit_wardrobe.userId = ". $_SESSION['userId'];
 				$result = mysqli_query($conn, $sql);
 				while($row = mysqli_fetch_assoc($result))
@@ -200,93 +158,6 @@
 			outfits.push(getAcro(wardrobe));
 			outfits.push(getMono(wardrobe));
 			outfits.push(getComp(wardrobe));
-			var outfit1 = [];
-			if(outfits[0] == null)
-			{
-				outfit1.push('<p> Please add more clothing; there are no current acceptable matches. </p>');
-			}
-			else
-			{
-			outfit1.push('<tr>');
-			if(outfits[0].jacket != null)
-			{
-					outfit1.push('<p>' + outfits[0].jacket.subsubtype + '</td>' + '<td> (' + outfits[0].jacket.subtype + ') </td>','<td style = color:'+ outfits[0].jacket.colorHex + '>'+ outfits[0].jacket.colorHex + '</td> </p> <p>');
-
-				}	
-				if(outfits[0].sweater != null)
-				{
-					outfit1.push('<td>' + outfits[0].sweater.subsubtype + '</td>' + '<td> (' + outfits[0].sweater.subtype + ') </td>','<td style = color:' + outfits[0].sweater.colorHex + '>'+ outfits[0].sweater.colorHex + '</td> </p> <p>');
-
-				}
-				if(outfits[0].shirt != null)
-				{
-					outfit1.push('<td>' + outfits[0].shirt.subsubtype + '</td>' + '<td> (' + outfits[0].shirt.subtype + ') </td>','<td style = color:' +  outfits[0].shirt.colorHex + '>'+ outfits[0].shirt.colorHex + '</td></p> <p>');
-
-				}
-				outfit1.push('<td>' + outfits[0].pants.subsubtype + '</td>' + '<td> (' + outfits[0].pants.subtype + ') </td>','<td style = color:' + outfits[0].pants.colorHex + '>'+ outfits[0].pants.colorHex + '</td></p> <p>');
-				outfit1.push('<td>' + outfits[0].shoes.subsubtype + '</td>' + '<td> (' + outfits[0].shoes.subtype + ') </td>','<td style = color:' + outfits[0].shoes.colorHex + '>'+ outfits[0].shoes.colorHex + '</td></p> <p>');
-			}
-			var outfit2 = [];
-			if(outfits[1] == null)
-			{
-				outfit2.push('<p> Please add more clothing; there are no current acceptable matches. </p>');
-			}
-			else
-			{
-				outfit2.push('<tr>');
-				if(outfits[1].jacket != null)
-				{
-					outfit2.push('<td>' + outfits[1].jacket.subsubtype + '</td>' + '<td> (' + outfits[1].jacket.subtype + ') </td>','<td style = color:' + outfits[1].jacket.colorHex + '>'+ outfits[1].jacket.colorHex + '</td></p> <p>');
-
-				}	
-				if(outfits[1].sweater != null)
-				{
-					outfit2.push('<td>' + outfits[1].sweater.subsubtype + '</td>' + '<td> (' + outfits[1].sweater.subtype + ') </td>','<td style = color:' + outfits[1].sweater.colorHex + '>'+ outfits[1].sweater.colorHex + '</td></p> <p>');
-
-				}
-				if(outfits[1].shirt != null)
-				{
-					outfit2.push('<td>' + outfits[1].shirt.subsubtype + '</td>' + '<td> (' + outfits[1].shirt.subtype + ') </td>','<td style = color:' + outfits[1].shirt.colorHex + '>'+ outfits[1].shirt.colorHex + '</td></p> <p>');
-
-				}
-				outfit2.push('<td>' + outfits[1].pants.subsubtype + '</td>' + '<td> (' + outfits[1].pants.subtype + ') </td>','<td style = color:' + outfits[1].pants.colorHex + '>'+ outfits[1].pants.colorHex + '</td></p> <p>');
-				outfit2.push('<td>' + outfits[1].shoes.subsubtype + '</td>' + '<td> (' + outfits[1].shoes.subtype + ') </td>','<td style = color:' + outfits[1].shoes.colorHex + '>'+ outfits[1].shoes.colorHex + '</td></p> <p>');
-			}
-			var outfit3 = [];
-			if(outfits[2] == null)
-			{
-				outfit3.push('<p> Please add more clothing; there are no current acceptable matches. </p>');
-			}
-			else
-			{
-				outfit3.push('<tr>');
-				if(outfits[2].jacket != null)
-				{
-					outfit3.push('<td>' + outfits[2].jacket.subsubtype + '</td>','<td> (' + outfits[2].jacket.subtype + ') </td>','<td style = color:' + outfits[2].jacket.colorHex + '>'+ outfits[2].jacket.colorHex + '</td></p> <p>');
-
-				}	
-				if(outfits[2].sweater != null)
-				{
-					outfit3.push('<td>' + outfits[2].sweater.subsubtype + '</td>' + '<td> (' + outfits[2].sweater.subtype + ') </td>','<td style = color:' + outfits[2].sweater.colorHex + '>'+ outfits[2].sweater.colorHex + '</td></p> <p>');
-
-				}
-				if(outfits[2].shirt != null)
-				{
-					outfit3.push('<td>' + outfits[2].shirt.subsubtype + '</td>' + '<td> (' + outfits[2].shirt.subtype + ') </td>','<td style = color:' + outfits[2].shirt.colorHex + '>'+ outfits[2].shirt.colorHex + '</td>');
-
-				}
-				outfit3.push('<td>' + outfits[2].pants.subsubtype + '</td>' + '<td> (' + outfits[2].pants.subtype + ') </td>','<td style = color:' + outfits[2].pants.colorHex + '>'+ outfits[2].pants.colorHex + '</td></p> <p>')
-				outfit3.push('<td>' + outfits[2].shoes.subsubtype + '</td>' + '<td> (' + outfits[2].shoes.subtype + ') </td>','<td style = color:' + outfits[2].shoes.colorHex + '>'+ outfits[2].shoes.colorHex + '</td></p> <p>');
-			}
-			var htmlString1 = outfit1.join('');
-			var htmlString2 = outfit2.join('');
-			var htmlString3 = outfit3.join('');
-			var element1 = document.getElementById('fit1');
-			var element2 = document.getElementById('fit2');
-			var element3 = document.getElementById('fit3');
-			element1.innerHTML = htmlString1;
-			element2.innerHTML = htmlString2;
-			element3.innerHTML = htmlString3;
 		}
 		function getDesiredClothesTypes()
 		{
@@ -572,6 +443,12 @@
 						}
 					}
 				}
+				/*console.log(jackets);
+				console.log(sweaters);
+				console.log(shirts);
+				console.log(pants);
+				console.log(shoes);
+				console.log(outfit);*/
 				if(outfitTemplate.jacket != null)
 				{
 					if(jackets.length != 0)
@@ -650,10 +527,6 @@
 				var shoes = [];
 				var seed = clothes.randomElement();
 				var seedi = 0;
-				if(seed == null)
-				{
-					return null;
-				}
 				while((seed.colorHsl[1] < .08 || seed.colorHsl[2] < .1 || seed.colorHsl[2] > .96) && seedi < 100)
 				{
 					seedi++;
@@ -802,19 +675,12 @@
 				var shirts = [];
 				var pants = [];
 				var shoes = [];
-				var seed = clothes.randomElement();
-				if(seed == null)
-				{
-					return null;
-				}
+				var seed = clothes.randomElement()
 				var seed_comp;
 				var seedi = 0;
 				var hasCompliment = false;
-				while((seed.colorHsl[1] < .08 || seed.colorHsl[2] < .1 || seed.colorHsl[2] > .96) || !hasCompliment && seedi < 100 )
+				while((seed.colorHsl[1] < .08 || seed.colorHsl[2] < .1 || seed.colorHsl[2] > .96) && seedi < 100 && !hasCompliment)
 				{
-					console.log(seed);
-					seed = clothes.randomElement();
-					console.log("looping");
 					for(var i = clothes.length-1; i>=0; i--)
 					{
 						if(seed.colorHsl[0] > 180)
@@ -837,12 +703,10 @@
 							}
 						}
 					}
-					console.log(seedi);
-					console.log(hasCompliment);
 					seedi++
-					if(seedi >= 99)
+					seed = clothes.randomElement();
+					if(seedi >= 100)
 					{
-						console.log("nope");
 						return null;
 					}
 				}
@@ -985,6 +849,7 @@
 			}
 			else
 			{
+				console.log(outfit);
 				return outfit;
 			}
 		}
@@ -992,8 +857,40 @@
 		{
 			return this[Math.floor(Math.random()*this.length)];
 		}
-
-
 		loadClothes();
 	</script>
+
+<body>
+	<link rel="stylesheet" href = "index.css">
+
+	<div class="topnav">
+		<a class="left" href="login.php">LOGIN/LOGOUT</a>
+		<a class="left" href ="profile.php">DASHBOARD</a>
+    	<a class="left" href="wardrobe.php">WARDROBE</a>
+  	</div>
+
+	<div>
+		<div>
+			<div>
+				<h1 class="header">Your Outfit Today</h1>
+
+
+				<!-- This is the place where the javascript inserts the weather information -->
+				<section class="weatherInfo">
+			
+				</section>
+
+
+				<!-- The section where the outfit is displayed -->
+				<div>
+
+
+				</div>
+
+
+			</div>
+		</div>
+		
+	</div>
+</body>
 </html>
